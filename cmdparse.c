@@ -210,6 +210,8 @@ CPS_GetSelectOption(char *option)
     return SRC_SELECT_REQUIRE;
   } else if (!strcasecmp(option, "trust")) {
     return SRC_SELECT_TRUST;
+  } else if (!strcasecmp(option, "failfast")) {
+    return SRC_SELECT_FAILFAST;
   }
   return 0;
 }

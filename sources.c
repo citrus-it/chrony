@@ -960,6 +960,15 @@ SRC_SelectSource(SRC_Instance updated_inst)
       continue;
     }
 
+    /* If the source is configured to fail fast and is currently unreachable,
+     * mark it as unselectable. */
+    if ((sources[i]->sel_options & SRC_SELECT_FAILFAST) &&
+	sources[i]->reachability == 0 &&
+	sources[i]->reachability_size == SOURCE_REACH_BITS) {
+          mark_source(sources[i], SRC_UNSELECTABLE);
+          continue;
+    }
+
     sources[i]->status = SRC_OK; /* For now */
 
     if (sources[i]->reachability && max_reach_sample_ago < first_sample_ago)
@@ -1083,6 +1092,8 @@ SRC_SelectSource(SRC_Instance updated_inst)
   if (n_endpoints == 0) {
     /* No sources provided valid endpoints */
     unselect_selected_source(LOGS_INFO, "Can't synchronise: no selectable sources", NULL);
+    if (REF_LocalEnabled())
+      REF_SetUnsynchronised();
     return;
   }
 

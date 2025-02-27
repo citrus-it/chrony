@@ -1285,6 +1285,12 @@ REF_DisableLocal(void)
   LOG(LOGS_INFO, "%s local reference mode", "Disabled");
 }
 
+int
+REF_LocalEnabled(void)
+{
+  return (enable_local_stratum);
+}
+
 /* ================================================== */
 
 #define LEAP_SECOND_CLOSE 5

@@ -89,5 +89,6 @@ typedef struct {
 #define SRC_SELECT_PREFER 0x2
 #define SRC_SELECT_TRUST 0x4
 #define SRC_SELECT_REQUIRE 0x8
+#define SRC_SELECT_FAILFAST 0x10
 
 #endif /* GOT_SRCPARAMS_H */
